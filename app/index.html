@@ -1,0 +1,58 @@
+<!doctype html>
+<head>
+	<meta charset="utf-8"> 
+	<html ng-app="weatherApp">
+	<!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+	<link rel="stylesheet" href="app.css">
+	<script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <script src="controllers/WeatherController.js"></script>
+    
+</head>
+
+	<body ng-controller="WeatherController"  >
+
+		<div class="center">
+			<form class="" name="weatherForm">
+				<p>Digite o nome de uma cidade para verificarmos o clima com o Open Weather Map. <br>
+				Será exibido o clima atual e o clima de amanhã.</p>
+				<div class="form-group" >
+					<label for="city" >Cidade:</label>
+					<input class="form-control" type="text" placeholder="Cidade..." name="city" ng-model="city" required />
+					<button class="btn btn-default" ng-click="forecastWeather(weatherForm.city.$valid)">Ver previsão</button>
+				</div>
+			</form>
+		</div>
+
+		<div class="center" ng-show="success">
+			<p> Mostrando os dados para {{cityName}}, {{country}}
+		</div>
+
+		<div class="col">
+
+			<div class="left" ng-show="success">		
+				<h3>Previsão Agora </h3>
+
+				<img ng-src="http://openweathermap.org/img/w/{{weatherNow.weather[0].icon}}.png" alt="" />
+				<p>Temperatura Máxima: {{weatherNow.main.temp_max}} °C</p>
+				<p>Temperatura Mínima: {{weatherNow.main.temp_min}} °C</p>
+				<p class="captext">Clima: {{weatherNow.weather[0].description}}</p>
+				<p>Vento: {{weatherNow.wind.speed}} km/h</p>
+				<p>Umidade: {{weatherNow.main.humidity}} %</p>
+
+		  	</div>
+
+		  	<div class="right" ng-show="success">
+				<h3>Previsão para Amanhã </h3>
+
+			    <img ng-src="http://openweathermap.org/img/w/{{weatherTomorrow.weather[0].icon}}.png" alt="" />
+			    <p>Temperatura Máxima: {{weatherTomorrow.main.temp_max}} °C</p>
+				<p>Temperatura Mínima: {{weatherTomorrow.main.temp_min}} °C</p>
+				<p class="captext">Clima: {{weatherTomorrow.weather[0].description}}</p>
+				<p>Vento: {{weatherTomorrow.wind.speed}} km/h</p>
+				<p>Umidade: {{weatherTomorrow.main.humidity}} %</p>
+			</div>	
+		</div>
+
+	</body>
+</html>
